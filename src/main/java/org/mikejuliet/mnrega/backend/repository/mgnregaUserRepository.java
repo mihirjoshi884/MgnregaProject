@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface mgnregaUserRepository {
     public void createUser(Users user);
-    public Users findUserByUsername(Users user);
+    public Users findUserByUsername(String user) throws SQLException;
     public List<UserResult> findAllGpmUsers() throws SQLException;
     public UserResult findGpmUserById(Users user) throws SQLException;
+    public List<UserResult> findAllBDOUsers() throws SQLException;
+    public UserResult findBDOUserById(Users user) throws SQLException;
 }

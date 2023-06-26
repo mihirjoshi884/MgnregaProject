@@ -33,9 +33,21 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
         connector.statementExecution(sqlStatment);
     }
 
-    public Users findUserByUsername(Users user) {
-        sqlStatment = "SELECT * FROM users WHERE username ="+ user.getUsername();
-        connector.dataRetrieve(sqlStatment);
+    public Users findUserByUsername(String username) throws SQLException {
+        Users user = new Users();
+        sqlStatment = "SELECT * FROM users WHERE username ="+ username;
+        ResultSet resultSet = connector.dataRetrieve(sqlStatment);
+        while(resultSet.next()){
+            user.setUser_code(resultSet.getString("user_code"));
+            user.setFirst_name(resultSet.getString("first_name"));
+            user.setLast_name(resultSet.getString("last_name"));
+            user.setUserType(resultSet.getString("user_type"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhone(resultSet.getInt("phone_number"));
+            user.setTenure(resultSet.getInt("tenure"));
+            user.setPassword(resultSet.getString("password"));
+            user.setSalary(resultSet.getInt("salary"));
+        }
         return user;
     }
 
@@ -59,7 +71,41 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
 
     public UserResult findGpmUserById(Users user) throws SQLException {
         UserResult response = new UserResult();
-        sqlStatment = "SELECT * FROM users WHERE user_code="+user.getUser_code();
+        sqlStatment = "SELECT * FROM users WHERE user_code="+user.getUser_code()+"&& user_type= GPM";
+        ResultSet resultSet = connector.dataRetrieve(sqlStatment);
+        while(resultSet.next()){
+            response.setUser_code(resultSet.getString("user_code"));
+            response.setName(resultSet.getString("first_name")
+                    .concat(resultSet.getString("last_name")));
+            response.setEmail(resultSet.getString("email"));
+            response.setTenure(resultSet.getInt("tenure"));
+            response.setSalary(resultSet.getInt("salary"));
+            response.setPhone(resultSet.getInt("phone_number"));
+        }
+        return response;
+    }
+
+    public List<UserResult> findAllBDOUsers() throws SQLException {
+        UserResult response = new UserResult();
+        sqlStatment = "SELECT * FROM users WHERE user_type = BDO";
+        ResultSet resultSet = connector.dataRetrieve(sqlStatment);
+        List<UserResult> result = new ArrayList<UserResult>();
+        while(resultSet.next()){
+            response.setUser_code(resultSet.getString("user_code"));
+            response.setName(resultSet.getString("first_name")
+                    .concat(resultSet.getString("last_name")));
+            response.setEmail(resultSet.getString("email"));
+            response.setTenure(resultSet.getInt("tenure"));
+            response.setSalary(resultSet.getInt("salary"));
+            response.setPhone(resultSet.getInt("phone_number"));
+            result.add(response);
+        }
+        return result;
+    }
+
+    public UserResult findBDOUserById(Users user) throws SQLException {
+        UserResult response = new UserResult();
+        sqlStatment = "SELECT * FROM users WHERE user_code="+user.getUser_code()+"&& user_type= BDO";
         ResultSet resultSet = connector.dataRetrieve(sqlStatment);
         while(resultSet.next()){
             response.setUser_code(resultSet.getString("user_code"));

@@ -1,10 +1,10 @@
 package org.mikejuliet.mnrega;
 
-import org.mikejuliet.mnrega.frontend.LoginPage;
+import org.mikejuliet.mnrega.frontend.FrontEndComponent;
 
 public class MGNREGAmain_app {
-    public static LoginPage loginPage;
+    public static FrontEndComponent loginPage;
     public static void main(String[] args) {
-        loginPage = new LoginPage();
+        loginPage = new FrontEndComponent();
     }
 }

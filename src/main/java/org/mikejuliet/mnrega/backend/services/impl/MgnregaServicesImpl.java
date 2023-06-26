@@ -40,14 +40,14 @@ public class MgnregaServicesImpl implements mgnregaServices {
 
     }
 
-    public Users loginAccount(Users user,String username, String password) {
-        Users result = userRepository.findUserByUsername(user);
+    public boolean loginAccount(String username, String password) throws SQLException {
+        Users result = userRepository.findUserByUsername(username);
 
         if((result.getUsername()==username)&&(result.getPassword()==helpingServices.passwordProtection(password))){
-            System.out.println("login successful");
+            return true;
         }
-        else System.out.println("login fail");
-        return null;
+        else return false;
+
     }
 
 
@@ -113,6 +113,14 @@ public class MgnregaServicesImpl implements mgnregaServices {
         Employee emp_result = employeeRepository.findEmployeeByUsername(employee.getUsername());
         EmployeeResult result = employeeRepository.showEmployeeDetails(emp_result);
         return result;
+    }
+
+    public UserResult getGPMuser(Users user) throws SQLException {
+        return userRepository.findGpmUserById(user);
+    }
+
+    public UserResult getBDOuser(Users user) throws SQLException {
+        return userRepository.findBDOUserById(user);
     }
 
 
