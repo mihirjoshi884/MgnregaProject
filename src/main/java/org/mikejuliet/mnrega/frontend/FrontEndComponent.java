@@ -202,5 +202,60 @@ public class FrontEndComponent {
 
 
     }
+    public void createBDOaccount(){
+        Users userInputData = null;
+        //user input from BDO
+        System.out.println("enter following details for BDO");
+        System.out.print("enter the first name :\t");
+        userInputData.setFirst_name(scanner.nextLine());
+        System.out.print("enter the last name \t");
+        userInputData.setLast_name(scanner.nextLine());
+        System.out.print("enter the username :\t");
+        userInputData.setUsername(scanner.nextLine());
+        System.out.print("enter the password :\t");
+        userInputData.setPassword(scanner.nextLine());
+        System.out.print("enter tenure of BDO:\t");
+        userInputData.setTenure(scanner.nextInt());
+        System.out.print("enter salary of BDO:\t");
+        userInputData.setSalary(scanner.nextInt());
+        System.out.print("enter email of BDO:\t");
+        userInputData.setEmail(scanner.nextLine());
+        System.out.print("enter phone number:\t");
+        userInputData.setPhone(scanner.nextInt());
+        System.out.print("enter four digit id:\t");
+        userInputData.setId(scanner.nextInt());
+        //creating BDO user
+        if(services.createBDOuser(userInputData)==true) System.out.println("BDO user is created");
+        else System.out.println("there is some mistake");
+
+    }
+    public void employeeLogin() throws SQLException {
+        System.out.println("welcome employee to MGNREGA");
+        System.out.println("enter username:");
+        username = scanner.nextLine();
+        System.out.println("enter password");
+        password = helpingServices.passwordProtection(scanner.nextLine());
+
+        Employee result = services.getEmployeeDetails(username);
+        if(result != null && username == result.getUsername() && password == result.getPassword()){
+            employeeUserProfile(result);
+        }
+        else {
+            for(int i=0;i<5;i++){
+                login();
+            }
+
+        }
+    }
+
+    private void employeeUserProfile(Employee result) {
+        System.out.println("welcome to MGNREGA ");
+        System.out.println("employee code is:"+result.getEmp_code());
+        System.out.println("name of the employee-\t"+result.getFirstName()+result.getLastName());
+        System.out.println("employee type-\t"+result.getEmp_type());
+        System.out.println("phone number of the employee-\t"+result.getPhone_number());
+        System.out.println("email of the employee"+result.getEmail());
+        System.out.println("employee is currently working on the project whose project code is:\t"+result.getProject_code());
+    }
 
 }

@@ -26,4 +26,5 @@ public interface mgnregaServices {
     public UserResult getGPMuser(Users user) throws SQLException;
     public UserResult getBDOuser(Users user) throws SQLException;
     public ProjectResult getProjectDetails(String projectName) throws SQLException;
+    public Employee getEmployeeDetails(String username) throws SQLException;
 }

@@ -130,5 +130,10 @@ public class MgnregaServicesImpl implements mgnregaServices {
         return result;
     }
 
+    public Employee getEmployeeDetails(String username) throws SQLException {
+        Employee result = employeeRepository.findEmployeeByUsername(username);
+        return result;
+    }
+
 
 }
