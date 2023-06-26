@@ -27,7 +27,7 @@ import static java.time.LocalDate.*;
 public class FrontEndComponent {
     String username = null;
     String password = null;
-    static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(" ");
     private HelpingServicesImpl helpingServices;
     private MgnregaServicesImpl services;
     private MgnregaUserRepositoryImpl userRepository;
@@ -203,7 +203,7 @@ public class FrontEndComponent {
 
     }
     public void createBDOaccount(){
-        Users userInputData = null;
+        Users userInputData = new Users();
         //user input from BDO
         System.out.println("enter following details for BDO");
         System.out.print("enter the first name :\t");
