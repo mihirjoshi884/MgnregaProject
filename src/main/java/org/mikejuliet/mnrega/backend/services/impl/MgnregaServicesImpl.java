@@ -25,19 +25,17 @@ public class MgnregaServicesImpl implements mgnregaServices {
     private ProjectResult projectResult;
     private MgnregaInterEntityRepository entityRepository;
 
-    public void createAccount(Users user) {
+    public boolean createAccount(Users user) {
         if(user != null){
-            if(user.getUserType()=="Block Development Officer"){
+            if(user.getUserType()=="BD0"){
                 user.setUser_code(helpingServices.BDOuser_code(user.getId()));
             }
             else user.setUser_code(helpingServices.GPMuser_code(user.getId()));
-
-            String password = helpingServices.passwordProtection(user.getPassword());
-            user.setPassword(password);
             userRepository.createUser(user);
-            System.out.println("user created");
+            return true ;
         }
 
+        return false;
     }
 
     public boolean loginAccount(String username, String password) throws SQLException {
@@ -60,23 +58,25 @@ public class MgnregaServicesImpl implements mgnregaServices {
         return employee;
     }
 
-    public void createEmployee(Employee employee) {
-
-        //generating random employee id for employee_code
-        Random random = new Random();
-        int empId = random.nextInt(9000) + 1000;
-        employee.setEmp_code(helpingServices.employeeCode(empId));
-        String protectedPwd = helpingServices.passwordProtection(employee.getPassword());
-        employee.setPassword(protectedPwd);
-        employeeRepository.createEmployee(employee);
+    public boolean createEmployee(Employee employee) {
+        if(employee!=null){
+            //generating random employee id for employee_code
+            Random random = new Random();
+            int empId = random.nextInt(9000) + 1000;
+            employee.setEmp_code(helpingServices.employeeCode(empId));
+            employeeRepository.createEmployee(employee);
+            return true;
+        }
+        else return false;
     }
 
-    public void createProject(Project project) {
+    public boolean createProject(Project project) {
         //generating random project value
         Random random = new Random();
         int projId = random.nextInt(9000)+1000;
         project.setProject_code(helpingServices.project_code(projId,project.getProject_name()));
         projectRepository.createProject(project);
+        return true;
     }
 
     public void showProjectList() throws SQLException {
@@ -94,17 +94,19 @@ public class MgnregaServicesImpl implements mgnregaServices {
         System.out.println(user);
     }
 
-    public void createGPMuser(Users user) {
+    public boolean createGPMuser(Users user) {
         user.setUserType("GPM");
-        createAccount(user);
+        if(createAccount(user)==true) return true;;
+        return false;
     }
 
-    public void createBDOuser(Users user) {
+    public boolean createBDOuser(Users user) {
         user.setUserType("BDO");
-        createAccount(user);
+        if(createAccount(user)==true) return true;;
+        return false;
     }
 
-    public UserProjectResult allocateProjectToGPM(Users user, Project project) {
+    public UserProjectResult allocateProjectToGPM(Users user, ProjectResult project) {
         UserProjectResult response = entityRepository.setFeilds(user,project);
         return response;
     }
@@ -121,6 +123,11 @@ public class MgnregaServicesImpl implements mgnregaServices {
 
     public UserResult getBDOuser(Users user) throws SQLException {
         return userRepository.findBDOUserById(user);
+    }
+
+    public ProjectResult getProjectDetails(String projectName) throws SQLException {
+        ProjectResult result = projectRepository.findProjectDetails(projectName);
+        return result;
     }
 
 

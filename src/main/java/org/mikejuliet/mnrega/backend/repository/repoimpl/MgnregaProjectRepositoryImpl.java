@@ -63,4 +63,15 @@ public class MgnregaProjectRepositoryImpl implements mgnregaProjectRepository {
         }
         return result;
     }
+    public ProjectResult findProjectDetails(String project_name) throws SQLException {
+        sqlStatment = "SELECT project_code, project_name FROM project WHERE project_name="+project_name;
+        ResultSet resultSet = connector.dataRetrieve(sqlStatment);
+        ProjectResult projectResult = new ProjectResult();
+        while (resultSet.next()) {
+            projectResult.setProject_code(resultSet.getString("project_code"));
+            projectResult.setProject_name(resultSet.getString("project_name"));
+
+        }
+        return projectResult;
+    }
 }

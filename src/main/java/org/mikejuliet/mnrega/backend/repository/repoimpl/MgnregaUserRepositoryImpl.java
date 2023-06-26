@@ -64,6 +64,7 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
             response.setTenure(resultSet.getInt("tenure"));
             response.setSalary(resultSet.getInt("salary"));
             response.setPhone(resultSet.getInt("phone_number"));
+            response.setUser_type(resultSet.getString("user_type"));
             result.add(response);
         }
         return result;
@@ -81,6 +82,7 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
             response.setTenure(resultSet.getInt("tenure"));
             response.setSalary(resultSet.getInt("salary"));
             response.setPhone(resultSet.getInt("phone_number"));
+            response.setUser_type(resultSet.getString("user_type"));
         }
         return response;
     }
@@ -98,6 +100,7 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
             response.setTenure(resultSet.getInt("tenure"));
             response.setSalary(resultSet.getInt("salary"));
             response.setPhone(resultSet.getInt("phone_number"));
+            response.setUser_type(resultSet.getString("user_type"));
             result.add(response);
         }
         return result;
@@ -115,6 +118,7 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
             response.setTenure(resultSet.getInt("tenure"));
             response.setSalary(resultSet.getInt("salary"));
             response.setPhone(resultSet.getInt("phone_number"));
+            response.setUser_type(resultSet.getString("user_type"));
         }
         return response;
     }

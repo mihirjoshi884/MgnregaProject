@@ -4,6 +4,7 @@ import org.mikejuliet.mnrega.backend.config.DatabaseConfiguration;
 import org.mikejuliet.mnrega.backend.config.DatabaseConnector;
 import org.mikejuliet.mnrega.backend.entities.Project;
 import org.mikejuliet.mnrega.backend.entities.Users;
+import org.mikejuliet.mnrega.backend.entities.helpingResult.ProjectResult;
 import org.mikejuliet.mnrega.backend.entities.helpingResult.UserProjectResult;
 import org.mikejuliet.mnrega.backend.repository.inter_entityRepository.mgnregaInterEntityRepository;
 import org.mikejuliet.mnrega.backend.services.impl.HelpingServicesImpl;
@@ -27,13 +28,13 @@ public class MgnregaInterEntityRepository implements mgnregaInterEntityRepositor
     }
 
 
-    public UserProjectResult setFeilds(Users user, Project project) {
+    public UserProjectResult setFeilds(Users user, ProjectResult project) {
         UserProjectResult response = null;
         response.setId(helpingServices.idForProject_allocation());
         response.setUser_code(user.getUser_code());
         response.setUser_name(user.getFirst_name().concat(user.getLast_name()));
         response.setProject_code(project.getProject_code());
-        response.setProject_code(project.getProject_name());
+        response.setUser_name(project.getProject_name());
 
         return response;
     }

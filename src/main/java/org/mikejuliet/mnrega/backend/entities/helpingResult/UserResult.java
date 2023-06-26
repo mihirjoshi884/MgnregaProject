@@ -13,4 +13,5 @@ public class UserResult {
     private int salary;
     private int phone;
     private String email;
+    private String user_type;
 }

@@ -11,4 +11,5 @@ public interface mgnregaProjectRepository {
     public void createProject(Project project);
     public Employee getProjectCode(String projectName) throws SQLException;
     public List<ProjectResult> getListOfProjects() throws SQLException;
+    public ProjectResult findProjectDetails(String project_name) throws SQLException;
 }
