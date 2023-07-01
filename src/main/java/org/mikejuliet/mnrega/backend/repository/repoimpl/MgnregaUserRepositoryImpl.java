@@ -18,7 +18,7 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
     String sqlStatment;
     public void createUser(Users user) {
         sqlStatment = "INSERT INTO " +
-                "users(user_code,first_name,last_name,user_type,tenure,salary,phone_number,email,username,password)" +
+                "users(user_code,first_name,last_name,tenure,salary,phone_number,email,username,password,user_type)" +
                 "VALUES("+user.getUser_code()+"," +
                 user.getFirst_name()+","+
                 user.getLast_name()+","+

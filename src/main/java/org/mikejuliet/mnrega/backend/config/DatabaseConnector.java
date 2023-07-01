@@ -52,32 +52,45 @@ public class DatabaseConnector {
 
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sqlStatement);
-            statement.execute();
+//            PreparedStatement  statement1= connection.prepareStatement(sqlStatement);
+//            statement1.execute();
 
-            // If you need to retrieve data from a SELECT statement
-            // resultSet = statement.executeQuery();
-            // Process the resultSet as needed
+            Statement st = connection.createStatement();
+            st.execute(sqlStatement);
 
             System.out.println("Statement executed successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Close resources
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        } finally {
+//            // Close resources
+//            try {
+//                if (resultSet != null) {
+//                    resultSet.close();
+//                }
+//                if (statement != null) {
+//                    statement.close();
+//                }
+//                if (connection != null) {
+//                    connection.close();
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 }

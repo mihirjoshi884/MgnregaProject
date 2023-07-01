@@ -27,11 +27,11 @@ import static java.time.LocalDate.*;
 public class FrontEndComponent {
     String username = null;
     String password = null;
-    static Scanner scanner = new Scanner(" ");
-    private HelpingServicesImpl helpingServices;
-    private MgnregaServicesImpl services;
-    private MgnregaUserRepositoryImpl userRepository;
-    private MgnregaEmployeeRepositoryImpl repository ;
+    static Scanner scanner = new Scanner(System.in);
+    private HelpingServicesImpl helpingServices = new HelpingServicesImpl();
+    private MgnregaServicesImpl services = new MgnregaServicesImpl();
+    private MgnregaUserRepositoryImpl userRepository = new MgnregaUserRepositoryImpl();
+    private MgnregaEmployeeRepositoryImpl repository = new MgnregaEmployeeRepositoryImpl() ;
 
     public void GPMuserProfile(UserResult user) throws SQLException {
         System.out.println("welcome "+user.getName()+"to MGNREGA");
@@ -206,11 +206,13 @@ public class FrontEndComponent {
         Users userInputData = new Users();
         //user input from BDO
         System.out.println("enter following details for BDO");
-        System.out.print("enter the first name :\t");
+        System.out.print("enter the first name :");
         userInputData.setFirst_name(scanner.nextLine());
-        System.out.print("enter the last name \t");
+        System.out.println(userInputData.getFirst_name());
+        System.out.print("enter the last name ");
+        System.out.println(userInputData.getLast_name());
         userInputData.setLast_name(scanner.nextLine());
-        System.out.print("enter the username :\t");
+        System.out.print("enter the username :");
         userInputData.setUsername(scanner.nextLine());
         System.out.print("enter the password :\t");
         userInputData.setPassword(scanner.nextLine());
@@ -219,12 +221,14 @@ public class FrontEndComponent {
         System.out.print("enter salary of BDO:\t");
         userInputData.setSalary(scanner.nextInt());
         System.out.print("enter email of BDO:\t");
-        userInputData.setEmail(scanner.nextLine());
+        userInputData.setEmail(scanner.next());
         System.out.print("enter phone number:\t");
         userInputData.setPhone(scanner.nextInt());
         System.out.print("enter four digit id:\t");
         userInputData.setId(scanner.nextInt());
         //creating BDO user
+
+
         if(services.createBDOuser(userInputData)==true) System.out.println("BDO user is created");
         else System.out.println("there is some mistake");
 

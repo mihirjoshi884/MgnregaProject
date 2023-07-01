@@ -1,13 +1,10 @@
 package org.mikejuliet.mnrega.backend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Getter @Setter @ToString
 public class Employee {
     private String emp_code;
     private String firstName;

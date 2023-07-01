@@ -1,11 +1,8 @@
 package org.mikejuliet.mnrega.backend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@NoArgsConstructor @Getter @Setter  @AllArgsConstructor
+@NoArgsConstructor @Getter @Setter  @AllArgsConstructor @ToString
 public class Project {
     private String project_code;
     private String project_name;

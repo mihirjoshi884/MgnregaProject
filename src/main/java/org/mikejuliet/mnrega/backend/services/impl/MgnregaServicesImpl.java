@@ -18,16 +18,16 @@ import java.util.List;
 import java.util.Random;
 
 public class MgnregaServicesImpl implements mgnregaServices {
-    private HelpingServicesImpl helpingServices;
-    private MgnregaUserRepositoryImpl userRepository;
-    private MgnregaEmployeeRepositoryImpl employeeRepository;
-    private MgnregaProjectRepositoryImpl projectRepository;
-    private ProjectResult projectResult;
-    private MgnregaInterEntityRepository entityRepository;
+    private HelpingServicesImpl helpingServices = new HelpingServicesImpl();
+    private MgnregaUserRepositoryImpl userRepository = new MgnregaUserRepositoryImpl();
+    private MgnregaEmployeeRepositoryImpl employeeRepository = new MgnregaEmployeeRepositoryImpl();
+    private MgnregaProjectRepositoryImpl projectRepository = new MgnregaProjectRepositoryImpl();
+    private ProjectResult projectResult = new ProjectResult();
+    private MgnregaInterEntityRepository entityRepository = new MgnregaInterEntityRepository();
 
     public boolean createAccount(Users user) {
         if(user != null){
-            if(user.getUserType()=="BD0"){
+            if(user.getUserType().equals("BDO")){
                 user.setUser_code(helpingServices.BDOuser_code(user.getId()));
             }
             else user.setUser_code(helpingServices.GPMuser_code(user.getId()));
