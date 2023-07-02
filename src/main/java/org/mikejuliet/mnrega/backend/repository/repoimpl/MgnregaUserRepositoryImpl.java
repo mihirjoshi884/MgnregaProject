@@ -6,6 +6,7 @@ import org.mikejuliet.mnrega.backend.entities.Users;
 import org.mikejuliet.mnrega.backend.repository.mgnregaUserRepository;
 import org.mikejuliet.mnrega.backend.entities.helpingResult.UserResult;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,22 +17,52 @@ public class MgnregaUserRepositoryImpl implements mgnregaUserRepository {
     private final DatabaseConfiguration configuration = new DatabaseConfiguration();
     private final DatabaseConnector connector = new DatabaseConnector();
     String sqlStatment;
-    public void createUser(Users user) {
-        sqlStatment = "INSERT INTO " +
-                "users(user_code,first_name,last_name,tenure,salary,phone_number,email,username,password,user_type)" +
-                "VALUES("+user.getUser_code()+"," +
-                user.getFirst_name()+","+
-                user.getLast_name()+","+
-                user.getTenure()+"," +
-                user.getSalary()+","+
-                user.getPhone()+","+
-                user.getEmail()+","+
-                user.getUsername()+","+
-                user.getPassword()+","+
-                user.getUserType()+")";
+//    public void createUser(Users user) throws SQLException {
+////        sqlStatment = "INSERT INTO " +
+////                "users(user_code,first_name,last_name,tenure,salary,phone_number,email,username,password,user_type)" +
+////                "VALUES("+user.getUser_code()+"," +
+////                user.getFirst_name()+","+
+////                user.getLast_name()+","+
+////                user.getTenure()+"," +
+////                user.getSalary()+","+
+////                user.getPhone()+","+
+////                user.getEmail()+","+
+////                user.getUsername()+","+
+////                user.getPassword()+","+
+////                user.getUserType()+")";
+//        sqlStatment = "INSERT INTO users(user_code,first_name,last_name,tenure,salary,phone_number,email,username,password,user_type)" +
+//                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+//        PreparedStatement sqlStatement = connector.getConnection().prepareStatement(sqlStatment);
+//        sqlStatement.setString(1,user.getUser_code());
+//        sqlStatement.setString(2,user.getFirst_name());
+//        sqlStatement.setString(3,user.getLast_name());
+//        sqlStatement.setInt(4,user.getTenure());
+//        sqlStatement.setInt(5,user.getSalary());
+//        sqlStatement.setInt(6,user.getPhone());
+//        sqlStatement.setString(7,user.getEmail());
+//        sqlStatement.setString(8,user.getUsername());
+//        sqlStatement.setString(9,user.getPassword());
+//        sqlStatement.setString(10,user.getUserType());
+//
+//        connector.statementExecution(sqlStatement);
+//    }
+public void createUser(Users user) throws SQLException {
+    sqlStatment = "INSERT INTO users(user_code, first_name, last_name, tenure, salary, phone_number, email, username, password, user_type) " +
+            "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    PreparedStatement sqlStatement = connector.getConnection().prepareStatement(sqlStatment);
+    sqlStatement.setString(1, user.getUser_code());
+    sqlStatement.setString(2, user.getFirst_name());
+    sqlStatement.setString(3, user.getLast_name());
+    sqlStatement.setInt(4, user.getTenure());
+    sqlStatement.setInt(5, user.getSalary());
+    sqlStatement.setInt(6, user.getPhone());
+    sqlStatement.setString(7, user.getEmail());
+    sqlStatement.setString(8, user.getUsername());
+    sqlStatement.setString(9, user.getPassword());
+    sqlStatement.setString(10, user.getUserType());
 
-        connector.statementExecution(sqlStatment);
-    }
+    connector.statementExecution(sqlStatement);
+}
 
     public Users findUserByUsername(String username) throws SQLException {
         Users user = new Users();
